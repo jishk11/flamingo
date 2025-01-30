@@ -20,7 +20,7 @@ jobs:
 
       # Log in to DigitalOcean Container Registry
       - name: Log in to DigitalOcean
-        run: echo "${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}"" | docker login -u "doctl" --password-stdin registry.digitalocean.com
+        run: echo "${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" | docker login -u "doctl" --password-stdin registry.digitalocean.com
 
       # Build and push Docker image
       - name: Build and push Docker image
