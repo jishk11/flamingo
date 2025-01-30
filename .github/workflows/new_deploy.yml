@@ -20,7 +20,7 @@ jobs:
 
       # Log in to DigitalOcean Container Registry
       - name: Log in to DigitalOcean
-        run: echo "${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}" | docker login -u "doctl" --password-stdin registry.digitalocean.com
+        run: echo "${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}"" | docker login -u "doctl" --password-stdin registry.digitalocean.com
 
       # Build and push Docker image
       - name: Build and push Docker image
@@ -28,10 +28,11 @@ jobs:
           docker buildx build --platform linux/amd64,linux/arm64 \
           --tag registry.digitalocean.com/dailybruin/dbonline:latest \
           --push .
-       # Update Kubernetes deployment
+
+      # Update Kubernetes deployment
       - name: Update Kubernetes deployment
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-          kubectl set image deployment/<flamingo> <container-name>=registry.digitalocean.com/dailybruin/dbonline:latest
-          kubectl rollout status deployment/<flamingo>
+          kubectl set image deployment/flamingo flamingo=registry.digitalocean.com/dailybruin/dbonline:latest
+          kubectl rollout status deployment/flamingo
