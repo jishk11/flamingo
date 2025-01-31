@@ -1,3 +1,10 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -44,3 +51,4 @@ jobs:
         run: |
           kubectl set image deployment/flamingo flamingo=registry.digitalocean.com/dailybruin/dbonline:latest
           kubectl rollout status deployment/flamingo
+  
