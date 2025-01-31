@@ -40,6 +40,10 @@ jobs:
         run: |
           curl -sL https://github.com/digitalocean/doctl/releases/download/v1.99.0/doctl-1.99.0-linux-amd64.tar.gz | tar -xzv
           sudo mv doctl /usr/local/bin/
+          
+      - name: Authenticate doctl
+        run: |
+            doctl auth init --access-token ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
       - name: Write kubeconfig to file
         run: |
