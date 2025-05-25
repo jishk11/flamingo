@@ -54,5 +54,6 @@ jobs:
           KUBECONFIG: kubeconfig.yaml
         run: |
           kubectl set image deployment/flamingo flamingo=dailybruin/flamingo:latest
+          kubectl rollout restart deployment flamingo
           kubectl rollout status deployment/flamingo
   
